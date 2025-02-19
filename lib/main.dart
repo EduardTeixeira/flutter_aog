@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aog/widgets/logo.widget.dart';
+import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,13 +18,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         //useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final _gasCtrl = MoneyMaskedTextController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,39 @@ class HomePage extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           Logo(),
+          Row(
+            children: <Widget>[
+              Container(
+                width: 100,
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "Gasolina",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 35,
+                    fontFamily: "Big Shoulders Display",
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: TextFormField(
+                  controller: _gasCtrl,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 45,
+                    fontFamily: "Big Shoulders Display",
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
