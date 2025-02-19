@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aog/widgets/input.widget.dart';
 import 'package:flutter_aog/widgets/logo.widget.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final _gasCtrl = MoneyMaskedTextController();
+  final _alcCtrl = MoneyMaskedTextController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,38 +37,13 @@ class HomePage extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           Logo(),
-          Row(
-            children: <Widget>[
-              Container(
-                width: 100,
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Gasolina",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 35,
-                    fontFamily: "Big Shoulders Display",
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: TextFormField(
-                  controller: _gasCtrl,
-                  keyboardType: TextInputType.number,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 45,
-                    fontFamily: "Big Shoulders Display",
-                  ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-            ],
+          Input(
+            label: "Gasolina",
+            ctrl: _gasCtrl,
+          ),
+          Input(
+            label: "Álcool",
+            ctrl: _alcCtrl,
           ),
         ],
       ),
