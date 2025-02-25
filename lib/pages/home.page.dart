@@ -5,13 +5,15 @@ import 'package:flutter_aog/widgets/success.widget.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  Color _color = Colors.deepPurple;
+
   var _gasCtrl = MoneyMaskedTextController();
   var _alcCtrl = MoneyMaskedTextController();
   var _busy = false;
@@ -22,21 +24,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: ListView(
-        children: <Widget>[
-          Logo(),
-          _completed
-              ? Success(
-                  result: _resultText,
-                  reset: reset,
-                )
-              : SubmitForm(
-                  gasCtrl: _gasCtrl,
-                  alcCtrl: _alcCtrl,
-                  busy: _busy,
-                  submitFunc: calculate,
-                ),
-        ],
+      body: AnimatedContainer(
+        duration: Duration(
+          milliseconds: 1200,
+        ),
+        color: _color,
+        child: ListView(
+          children: <Widget>[
+            Logo(),
+            _completed
+                ? Success(
+                    result: _resultText,
+                    reset: reset,
+                  )
+                : SubmitForm(
+                    gasCtrl: _gasCtrl,
+                    alcCtrl: _alcCtrl,
+                    busy: _busy,
+                    submitFunc: calculate,
+                  ),
+          ],
+        ),
       ),
     );
   }
@@ -50,6 +58,7 @@ class _HomePageState extends State<HomePage> {
     double res = alc / gas;
 
     setState(() {
+      _color = Colors.purpleAccent;
       _completed = false;
       _busy = true;
     });
@@ -74,6 +83,7 @@ class _HomePageState extends State<HomePage> {
       _gasCtrl = MoneyMaskedTextController();
       _completed = false;
       _busy = false;
+      _color = Colors.deepPurple;
     });
   }
 }
